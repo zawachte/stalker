@@ -1,0 +1,51 @@
+openapi: "3.0.0"
+info:
+  version: 1.0.0
+  title: stalker
+  description: stalks around and keeps track
+  termsOfService: http://swagger.io/terms/
+  contact:
+    name: Zachary Wachtel
+    email: zawachte@gmail.com
+    url: https://www.zachwachtel.com/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+servers:
+- url: http://localhost/api
+paths:
+  /metricsList:
+    get:
+      summary: Get metrics from a past time period
+      parameters:
+        - in: query
+          name: startTime
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+          description: Get metrics from a past time period
+        - in: query
+          name: endTime
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+          description: Get metrics from a past time period
+      responses:
+        '200':
+          description: metricsList with given id
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/metricsList'
+
+components:
+  schemas:
+    metricsList:
+      type: object
+      properties:
+        metrics:
+          type: array
+          items:
+            type: string
